@@ -3,6 +3,8 @@ on: [pull_request]
 jobs:
   init:
     runs-on: ubuntu-latest
+    outputs:
+      SELECTED_COLOR: ${{ steps.set_vars.outputs.SELECTED_COLOR }}
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event by ${{ github.actor }}"
       - run: echo "head_ref is ${{ github.head_ref }}"
