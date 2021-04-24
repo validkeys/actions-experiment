@@ -14,7 +14,7 @@ jobs:
       - name: main Check 
         id: is_main
         run: |
-          value=$([${{ github.ref }} = 'refs/heads/main'] && 'true' || 'false')
+          value=$([refs/pull/2/merge = 'refs/heads/main'] && echo 'true' || echo 'false')
           echo "::set-output name=value::${value}"
       - name: is be deps 
         id: is_be_deps
