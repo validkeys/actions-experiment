@@ -19,7 +19,7 @@ jobs:
       - name: is be deps 
         id: is_be_deps
         run: |
-          value=$([${{ github.head_ref }} =~ ^be-deps\/.* ] && echo 'true' || echo 'false')
+          value=$([[${{ github.head_ref }} =~ ^be-deps\/.* ]] && echo 'true' || echo 'false')
           echo "::set-output name=value::${value}"
       - run: echo 'is_main set ${{ steps.is_main.outputs.value }}'
       - run: echo 'is_be_deps set ${{ steps.is_be_deps.outputs.value }}'
