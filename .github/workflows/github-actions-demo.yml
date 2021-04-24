@@ -2,31 +2,31 @@ name: GitHub Actions Demo
 on:
   push:
     branches:
-      - master
+      - main
   pull_request:
 jobs:
   init:
     runs-on: ubuntu-latest
     outputs:
-      is_master: ${{ steps.is_master.outputs.value }}
+      is_main: ${{ steps.is_main.outputs.value }}
     steps:
-      - name: Master Check 
-        id: is_master
+      - name: main Check 
+        id: is_main
         run: |
-          if [ ${{ github.ref }} = 'refs/heads/master' ]
+          if [ ${{ github.ref }} = 'refs/heads/main' ]
           then
             echo '::set-output name=value::true'
           else
             echo '::set-output name=value::false'
           fi
-      - run: echo 'color set ${{ steps.is_master.outputs.value }}'
+      - run: echo 'color set ${{ steps.is_main.outputs.value }}'
 
 
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
     needs: init
     steps:
-      - run: echo ${{ needs.init.outputs.is_master }}
+      - run: echo ${{ needs.init.outputs.is_main }}
 
 # THINGS I NEED TO FIGURE OUT
 
