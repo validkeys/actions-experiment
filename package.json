@@ -1,0 +1,8 @@
+{
+  "name": "actions-experiment",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:validkeys/actions-experiment.git",
+  "author": "Kyle Davis <validkeys@gmail.com> (https://twitter.com/validkeys)",
+  "license": "MIT"
+}
