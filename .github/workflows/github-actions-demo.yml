@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: init
     steps:
-      - run: echo "Value is ${{ needs.init.outputs.SELECTED_COLOR }}"
+      - run: echo ${{ needs.init.outputs }}
 
 # THINGS I NEED TO FIGURE OUT
 
