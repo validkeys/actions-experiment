@@ -14,12 +14,8 @@ jobs:
       - name: main Check 
         id: is_main
         run: |
-          if [ ${{ github.ref }} = 'refs/heads/main' ]
-          then
-            echo '::set-output name=value::true'
-          else
-            echo '::set-output name=value::false'
-          fi
+          value=$([${{ github.ref }} = 'refs/heads/main'] && 'true' || 'false')
+          echo "::set-output name=value::${value}"
       - name: is be deps 
         id: is_be_deps
         run: |
