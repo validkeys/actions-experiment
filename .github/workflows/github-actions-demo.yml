@@ -9,6 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       is_main: ${{ steps.is_main.outputs.value }}
+      is_be_deps: ${{ steps.is_be_deps.outputs.value }}
     steps:
       - name: main Check 
         id: is_main
@@ -19,14 +20,26 @@ jobs:
           else
             echo '::set-output name=value::false'
           fi
+      - name: is be deps 
+        id: is_be_deps
+        run: |
+          if [ ${{ github.ref }} =~ ^be-deps\/.* ]
+          then
+            echo '::set-output name=value::true'
+          else
+            echo '::set-output name=value::false'
+          fi          
       - run: echo 'is_main set ${{ steps.is_main.outputs.value }}'
+      - run: echo 'is_be_deps set ${{ steps.is_be_deps.outputs.value }}'
+
 
 
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
     needs: init
     steps:
-      - run: echo ${{ needs.init.outputs.is_main }}
+      - run: echo 'Is Main =${{ needs.init.outputs.is_main }}'
+      - run: echo 'Is BE DEPS =${{ needs.init.outputs.is_be_deps }}''
 
 # THINGS I NEED TO FIGURE OUT
 
