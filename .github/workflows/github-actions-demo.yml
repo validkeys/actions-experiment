@@ -45,11 +45,15 @@ jobs:
     runs-on: ubuntu-latest
     needs: init
     if: ${{ needs.init.outputs.is_main == 'true' }}
+    steps:
+      - run: echo 'running main job'
 
   be_deps_job:
     runs-on: ubuntu-latest
     needs: init
     if: ${{ needs.init.outputs.is_be_deps == 'true' }}
+    steps:
+      - run: echo 'running be_deps job'    
   
   runs_on_either:
     runs-on: ubuntu-latest
@@ -57,6 +61,9 @@ jobs:
     if: |
       needs.init.outputs.is_main == 'true' ||
       needs.init.outputs.is_be_deps == 'true'
+    steps:
+      - run: echo 'running either job'    
+
 # THINGS I NEED TO FIGURE OUT
 
 # 1. caching and restoring yarn node_modules
