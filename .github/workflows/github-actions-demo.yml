@@ -19,7 +19,7 @@ jobs:
           else
             echo '::set-output name=value::false'
           fi
-      - run: echo 'color set ${{ steps.is_main.outputs.value }}'
+      - run: echo 'is_main set ${{ steps.is_main.outputs.value }}'
 
 
   Explore-GitHub-Actions:
