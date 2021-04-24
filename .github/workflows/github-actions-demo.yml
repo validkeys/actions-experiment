@@ -9,24 +9,52 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       is_main: ${{ steps.is_main.outputs.value }}
+      is_be_deps: ${{ steps.is_be_deps.outputs.value }}
     steps:
       - name: main Check 
         id: is_main
         run: |
-          if [ ${{ github.ref }} = 'refs/heads/main' ]
-          then
-            echo '::set-output name=value::true'
-          else
-            echo '::set-output name=value::false'
-          fi
+          value=$([${{ github.ref }} = 'refs/heads/main'] && echo 'true' || echo 'false')
+          echo "::set-output name=value::${value}"
+      - name: is be deps 
+        id: is_be_deps
+        run: |
+          value=$([[ ${{ github.head_ref }} =~ ^be-deps\/.* ]] && echo 'true' || echo 'false')
+          echo "::set-output name=value::${value}"
       - run: echo 'is_main set ${{ steps.is_main.outputs.value }}'
+      - run: echo 'is_be_deps set ${{ steps.is_be_deps.outputs.value }}'
+
 
 
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
     needs: init
     steps:
-      - run: echo ${{ needs.init.outputs.is_main }}
+      - run: echo 'Is Main = ${{ needs.init.outputs.is_main }}'
+      - run: echo 'Is BE DEPS = ${{ needs.init.outputs.is_be_deps }}'
+
+  main_job:
+    runs-on: ubuntu-latest
+    needs: init
+    if: ${{ needs.init.outputs.is_main == 'true' }}
+    steps:
+      - run: echo 'running main job'
+
+  be_deps_job:
+    runs-on: ubuntu-latest
+    needs: init
+    if: ${{ needs.init.outputs.is_be_deps == 'true' }}
+    steps:
+      - run: echo 'running be_deps job'    
+  
+  runs_on_either:
+    runs-on: ubuntu-latest
+    needs: init
+    if: |
+      needs.init.outputs.is_main == 'true' ||
+      needs.init.outputs.is_be_deps == 'true'
+    steps:
+      - run: echo 'running either job'    
 
 # THINGS I NEED TO FIGURE OUT
 
