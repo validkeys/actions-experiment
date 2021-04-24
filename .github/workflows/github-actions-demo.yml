@@ -23,7 +23,7 @@ jobs:
       - name: is be deps 
         id: is_be_deps
         run: |
-          if [ ${{ github.ref }} =~ ^be-deps\/.* ]
+          if [ ${{ github.head_ref }} =~ ^be-deps\/.* ]
           then
             echo '::set-output name=value::true'
           else
