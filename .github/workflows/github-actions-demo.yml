@@ -10,14 +10,14 @@ jobs:
       - run: echo "ref is ${{ github.ref }}"
       - run: |
           echo "Setting job conditional output variables"
-          echo "::set-output name=SELECTED_COLOR::green"
+          echo '::set-output name=SELECTED_COLOR::green'
 
 
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
     needs: init
     steps:
-      - run: echo ${{ needs.init.outputs }}
+      - run: echo ${{ needs.init.outputs.SELECTED_COLOR }}
 
 # THINGS I NEED TO FIGURE OUT
 
