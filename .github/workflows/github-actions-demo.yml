@@ -10,7 +10,7 @@ jobs:
       - run: echo "ref is ${{ github.ref }}"
       - run: |
           echo "Setting job conditional output variables"
-          echo ""::set-output name=SELECTED_COLOR::green"
+          echo "::set-output name=SELECTED_COLOR::green"
 
 
   Explore-GitHub-Actions:
