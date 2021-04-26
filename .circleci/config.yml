@@ -1,7 +1,14 @@
 version: 2.1
+
+jobs:
+  pull:
+    docker: # run the steps with Docker
+      - image: circleci/node:12.18.2-stretch  
+    steps:
+      - checkout
+      - run: git pull -q origin/$CIRCLE_BRANCH
+
 workflows:
   welcome:
     jobs:
-      test:
-        steps:
-          - run: git pull -q origin/$CIRCLE_BRANCH
+      - pull
