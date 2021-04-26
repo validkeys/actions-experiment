@@ -12,6 +12,9 @@ jobs:
           GIT_COMMITTER_EMAIL: bot@welement.com
     steps:
       - checkout
+      - add_ssh_keys:
+          fingerprints:
+            - "cd:52:15:c6:52:bf:5a:c0:2d:cd:c0:30:9e:cb:4f:f4"
       - run: git pull origin $CIRCLE_BRANCH
       - run: |
           git commit --allow-empty -m "Pull was run!"
