@@ -17,7 +17,7 @@ jobs:
             - "cd:52:15:c6:52:bf:5a:c0:2d:cd:c0:30:9e:cb:4f:f4"
       - run: git pull origin $CIRCLE_BRANCH
       - run: |
-          git commit --allow-empty -m "Pull was run!"
+          git commit --allow-empty -m "Pull was run! [ci skip]"
           git push origin $CIRCLE_BRANCH
 
 workflows:
